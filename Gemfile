@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # CORE
 gem 'sinatra'
+gem 'shotgun'
 
 
 #DEVELOPMENT
