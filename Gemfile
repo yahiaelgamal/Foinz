@@ -8,6 +8,10 @@ gem 'haml'
 
 #DEVELOPMENT
 
+#FRONTEND
+gem 'sass'
+gem 'rack-coffee'
+
 
 # TEST
 gem 'rack-test', group: :test

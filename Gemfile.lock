@@ -17,6 +17,7 @@ GEM
     rspec-expectations (2.8.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.8.0)
+    sass (3.4.9)
     shotgun (0.9)
       rack (>= 1.0)
     sinatra (1.4.5)
@@ -32,5 +33,6 @@ DEPENDENCIES
   haml
   rack-test
   rspec
+  sass
   shotgun
   sinatra

@@ -1,12 +1,14 @@
 require 'sinatra'
 require 'haml'
 
+set :haml, layout: true
+
 get '/' do
-  "Hello, World!"
+ haml "Hello, World!!!"
 end
 
 get '/about' do
-  'A little about me. Ya gamoosa'
+  haml 'A little about me. Ya gamoosa'
 end
 
 get '/form' do
@@ -15,11 +17,11 @@ end
 
 post '/form' do
   # TODO use js
-  "Post Yo dafuc form"
+  haml "Post Yo dafuc form"
 end
 
 get '/secret' do
-  haml :secret
+  haml :secret#, layout: :layout
 end
 
 post '/secret' do
@@ -28,5 +30,5 @@ end
 
 not_found do
   status 404
-  "404, seriously -.-'"
+  haml "404, seriously -.-'"
 end
