@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # CORE
 gem 'sinatra'
 gem 'shotgun'
+gem 'haml'
 
 
 #DEVELOPMENT
