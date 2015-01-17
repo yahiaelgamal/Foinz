@@ -6,14 +6,18 @@ require 'sinatra/partial'
 require 'awesome_print'
 require 'mongoid'
 
-Dir.glob('./{models helpers}/*.rb').each { |file| require file }
 
-set :haml, layout: true
+Dir.glob('./models/*.rb').each { |file| require file }
 
-use Rack::Session::Cookie, secret: 'elsa7elda7emboo'
 
+Mongoid.load!("config/mongoid.yml")
+
+# AUTHENTCATION FACEBOOK
 APP_ID     = 306913702832623
 APP_SECRET = '3e2b50f67f7d8ee2d38ef3f1944855ea'
+
+use Rack::Session::Cookie, secret: 'elsa7elda7emboo'
+set :haml, layout: true
 
 get '/' do
  haml :home
@@ -67,6 +71,8 @@ get '/callback' do
   session['access_token'] = session['oauth'].get_access_token(params[:code])
   @graph = Koala::Facebook::API.new(session['access_token'])
   profile = @graph.get_object("me")
+  ap params
+  ap profile
   # TODO put in db
   redirect '/'
 end
