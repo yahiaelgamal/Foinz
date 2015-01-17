@@ -4,6 +4,9 @@ require 'omniauth'
 require 'koala'
 require 'sinatra/partial'
 require 'awesome_print'
+require 'mongoid'
+
+Dir.glob('./{models helpers}/*.rb').each { |file| require file }
 
 set :haml, layout: true
 
@@ -43,6 +46,7 @@ not_found do
 end
 
 ################################ AUTHENTICATION ###############################
+
 get '/login' do
   # generate a new oauth object with your app data and your callback url
   session['oauth'] = Koala::Facebook::OAuth.new(APP_ID, APP_SECRET,
@@ -61,7 +65,9 @@ end
 get '/callback' do
   #get the access token from facebook with your code
   session['access_token'] = session['oauth'].get_access_token(params[:code])
-  ap params
+  @graph = Koala::Facebook::API.new(session['access_token'])
+  profile = @graph.get_object("me")
+  # TODO put in db
   redirect '/'
 end
 ################################ AUTHENTICATION END ###########################
