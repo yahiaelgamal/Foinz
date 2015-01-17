@@ -9,6 +9,7 @@ then ```shotgun app.rb```
 
 If you want to sign in with fb, you need to add the following line in /etc/hosts
 (make sure you are sudo)
+
 ```127.0.0.1 local.foinz.com```
 
 
