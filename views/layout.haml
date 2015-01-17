@@ -5,7 +5,8 @@
     %link{href: '/stylesheets/style.css', rel: 'stylesheet'}
     %title Foinz
   %body
-    %div.main-container
+    %div.container#main-container
+      = partial 'partials/header'
       %a{href: 'http://google.com'} Hello
       = yield
 

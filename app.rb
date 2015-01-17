@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'haml'
+require 'sinatra/partial'
 
 set :haml, layout: true
 

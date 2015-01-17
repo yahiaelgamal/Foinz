@@ -1,0 +1,33 @@
+$dark-grey: #333;
+$light-grey: #444;
+$lime-green: #BFFA37;
+
+body{
+
+  background-color: #333;
+  color: $lime-green;
+}
+.main-container{
+  margin: 20px;
+}
+.navbar-default{
+  margin-top: 10px;
+  background-color: $dark-grey;
+  border-color: $lime-green;
+  a{
+    color: $lime-green !important;
+  }
+  li.active{
+    a{
+      background-color: $lime-green !important;
+      color: $dark-grey !important;
+    }
+  }
+}
+#main-container{
+  width: 70%;
+  background-color: $light-grey;
+}
+a:hover{
+  text-shadow: $lime-green 1px 1px 7px;
+}

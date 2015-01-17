@@ -11,6 +11,7 @@ gem 'haml'
 #FRONTEND
 gem 'sass'
 gem 'rack-coffee'
+gem 'sinatra-partial'
 
 
 # TEST
