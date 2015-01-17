@@ -1,1 +1,10 @@
 = partial 'partials/football_parallax'
+
+- if session['access_token']
+  You are logged in!
+  %a{href: '/logout'}
+    Logout
+
+-else
+  %a{href: '/login'}
+    Login
