@@ -13,6 +13,7 @@ gem 'mongoid'
 #DEVELOPMENT
 gem 'awesome_print'
 gem 'byebug' # to run a debugger, add byebug for breakpoints
+gem 'racksh'
 
 
 #FRONTEND

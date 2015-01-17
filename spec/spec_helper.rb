@@ -18,3 +18,8 @@ RSpec.configure do |config|
   end
   config.include RSpecMixin
 end
+
+# to get the sesssion
+def session
+  last_request.env['rack.session']
+end
