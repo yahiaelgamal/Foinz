@@ -5,7 +5,8 @@ To start the the dev environment run
 
 `mongod`
 
-then ```shotgun app.rb```
+
+then ```shotgun app.rb``` make sure you `bundle install`
 
 If you want to sign in with fb, you need to add the following line in /etc/hosts
 (make sure you are sudo)
