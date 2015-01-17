@@ -12,6 +12,8 @@ gem 'koala'
 
 #DEVELOPMENT
 gem 'awesome_print'
+#gem 'debugger'
+#gem 'racksh'
 
 #FRONTEND
 gem 'sass'
