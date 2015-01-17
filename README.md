@@ -2,6 +2,7 @@ Welcome to Foinz
 =================
 
 To start the the dev environment run 
+
 `mongod`
 
 then ```shotgun app.rb```
