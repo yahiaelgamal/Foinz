@@ -1,9 +1,3 @@
-require 'sinatra'
-require 'haml'
-require 'omniauth'
-require 'koala'
-
-
 set :haml, layout: true
 
 use Rack::Session::Cookie, secret: 'elsa7elda7emboo'

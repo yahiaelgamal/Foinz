@@ -16,6 +16,7 @@ gem 'awesome_print'
 #FRONTEND
 gem 'sass'
 gem 'rack-coffee'
+gem 'sinatra-partial'
 
 
 # TEST
