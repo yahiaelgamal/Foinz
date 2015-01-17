@@ -1,10 +1,39 @@
 require 'sinatra'
 require 'haml'
+require 'omniauth'
+require 'koala'
+
 
 set :haml, layout: true
 
+use Rack::Session::Cookie, secret: 'elsa7elda7emboo'
+
+APP_ID     = 306913702832623
+APP_SECRET = '3e2b50f67f7d8ee2d38ef3f1944855ea'
+
 get '/' do
- haml "Hello, World!!!"
+  haml :home_page
+end
+
+get '/login' do
+  # generate a new oauth object with your app data and your callback url
+  session['oauth'] = 
+    Koala::Facebook::OAuth.new(APP_ID, APP_SECRET, "#{request.base_url}/callback")
+  # redirect to facebook to get your code
+  redirect session['oauth'].url_for_oauth_code()
+end
+
+get '/logout' do
+  session['oauth'] = nil
+  session['access_token'] = nil
+  redirect '/'
+end
+
+#method to handle the redirect from facebook back to you
+get '/callback' do
+  #get the access token from facebook with your code
+  session['access_token'] = session['oauth'].get_access_token(params[:code])
+  redirect '/'
 end
 
 get '/about' do

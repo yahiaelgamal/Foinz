@@ -4,9 +4,14 @@ source 'https://rubygems.org'
 gem 'sinatra'
 gem 'shotgun'
 gem 'haml'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'koala'
+
 
 
 #DEVELOPMENT
+gem 'awesome_print'
 
 #FRONTEND
 gem 'sass'
