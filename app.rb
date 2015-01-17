@@ -5,7 +5,7 @@ require 'sinatra/partial'
 set :haml, layout: true
 
 get '/' do
- haml "Hello, World!!!"
+ haml :home
 end
 
 get '/about' do

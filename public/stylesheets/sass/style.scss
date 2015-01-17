@@ -4,7 +4,7 @@ $lime-green: #BFFA37;
 
 body{
 
-  background-color: #333;
+  background-color: $light-grey;
   color: $lime-green;
 }
 .main-container{
@@ -25,9 +25,16 @@ body{
   }
 }
 #main-container{
-  width: 70%;
-  background-color: $light-grey;
+  width: 80%;
+  background-color: $dark-grey;
 }
 a:hover{
   text-shadow: $lime-green 1px 1px 7px;
+}
+.ball{
+  position: absolute;
+  right: 10px;
+}
+.plax-wrapper{
+  overflow: hidden;
 }
