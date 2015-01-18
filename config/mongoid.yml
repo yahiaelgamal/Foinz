@@ -1,0 +1,7 @@
+development:
+  sessions:
+    default:
+      database: foinz_development
+      hosts:
+        - localhost:27017
+
