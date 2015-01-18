@@ -1,9 +1,4 @@
-test:
-  sessions:
-    default:
-      database: foinz_test
-      hosts:
-        - localhost:27017
+
 development:
   sessions:
     default:
@@ -11,3 +6,10 @@ development:
       hosts:
         - localhost:27017
 
+
+test:
+  sessions:
+    default:
+      database: foinz_test
+      hosts:
+        - localhost:27017

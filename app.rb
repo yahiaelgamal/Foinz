@@ -9,8 +9,7 @@ require 'mongoid'
 
 Dir.glob('./models/*.rb').each { |file| require file }
 
-
-Mongoid.load!("config/mongoid.yml")
+Mongoid.load!("config/mongoid.yml", ENV['RACK_ENV'])
 
 # AUTHENTCATION FACEBOOK
 APP_ID     = 306913702832623

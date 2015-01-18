@@ -1,10 +1,11 @@
 # spec/spec_helper.rb
+
+ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 require 'rspec'
 require File.expand_path('../../app.rb', __FILE__)
 Dir.glob('./{models helpers}/*.rb').each { |file| require file }
 
-ENV['RACK_ENV'] = 'test'
 
 module RSpecMixin
   include Rack::Test::Methods
@@ -17,6 +18,11 @@ RSpec.configure do |config|
     mocks.syntax = [:expect, :should]
   end
   config.include RSpecMixin
+
+  # reset database
+  config.before(:each) do
+    Mongoid::Sessions.default.collections.select {|c| c.name !~ /system/ }.each(&:drop)
+  end
 end
 
 # to get the sesssion

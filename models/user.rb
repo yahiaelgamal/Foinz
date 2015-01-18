@@ -11,9 +11,7 @@ class User
   def self.create_user_from_fb(profile, access_token)
     keys = %w(first_name last_name email access_token)
     needed_info = profile.select{|k,_| keys.include?(k.to_s) }
-    ap 'here'
-    ap needed_info
-    ap User.create(needed_info.merge(access_token: access_token))
+    User.create(needed_info.merge(access_token: access_token))
   end
 
 end
