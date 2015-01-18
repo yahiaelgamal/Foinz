@@ -4,10 +4,12 @@ require 'omniauth'
 require 'koala'
 require 'sinatra/partial'
 require 'awesome_print'
+require 'byebug'
 require 'mongoid'
 
 
 Dir.glob('./models/*.rb').each { |file| require file }
+Dir.glob('./helpers/*.rb').each { |file| require file }
 
 Mongoid.load!("config/mongoid.yml", ENV['RACK_ENV'])
 
@@ -55,22 +57,23 @@ get '/login' do
   session['oauth'] = Koala::Facebook::OAuth.new(APP_ID, APP_SECRET,
                                                 "#{request.base_url}/callback")
   # redirect to facebook to get your code
-  redirect session['oauth'].url_for_oauth_code()
+  redirect session['oauth'].url_for_oauth_code(permissions: 'email')
 end
 
 get '/logout' do
   session['oauth'] = nil
-  session['access_token'] = nil
+  session['current_user'] = nil
   redirect '/'
 end
 
 # method to handle the redirect from facebook back to you
 get '/callback' do
   #get the access token from facebook with your code
-  session['access_token'] = session['oauth'].get_access_token(params[:code])
-  @graph = Koala::Facebook::API.new(session['access_token'])
+  token = session['oauth'].get_access_token(params[:code])
+  @graph = Koala::Facebook::API.new(token)
   profile = @graph.get_object("me")
-  User.create_user_from_fb(profile, session['access_token'])
+  user = User.create_user_from_fb(profile, token)
+  session['current_user'] = user
   redirect '/'
 end
 ################################ AUTHENTICATION END ###########################

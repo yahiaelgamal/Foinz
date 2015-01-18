@@ -1,5 +1,5 @@
 helpers do
-  def signed_in?
-    @user != nil
+  def current_user
+    session['current_user']
   end
 end

@@ -1,7 +1,7 @@
 = partial 'partials/football_parallax'
 
-- if session['access_token']
-  You are logged in!
+- if session['current_user']
+  You are logged in! as #{current_user.first_name}
   %a{href: '/logout'}
     Logout
 
