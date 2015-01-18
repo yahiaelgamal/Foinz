@@ -71,9 +71,7 @@ get '/callback' do
   session['access_token'] = session['oauth'].get_access_token(params[:code])
   @graph = Koala::Facebook::API.new(session['access_token'])
   profile = @graph.get_object("me")
-  ap params
-  ap profile
-  # TODO put in db
+  User.create_user_from_fb(profile, session['access_token'])
   redirect '/'
 end
 ################################ AUTHENTICATION END ###########################

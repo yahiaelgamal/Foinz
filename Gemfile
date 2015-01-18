@@ -26,6 +26,7 @@ gem 'sinatra-partial'
 gem 'rack-test', group: :test
 gem 'rspec', group: :test
 gem 'rspec-mocks'
+#gem 'simplecov'
 
 
 # PRODUCTION
