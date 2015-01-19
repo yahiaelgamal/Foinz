@@ -3,6 +3,9 @@
 ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 require 'rspec'
+require 'simplecov'
+SimpleCov.start
+
 require File.expand_path('../../app.rb', __FILE__)
 
 
