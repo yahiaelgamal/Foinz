@@ -4,6 +4,6 @@ describe 'Landing page' do
 
   it 'should render layout including Foinz' do
     get '/'
-    last_response.body.include?('Foinz').should be_true
+    expect(last_response.body).to include('Foinz')
   end
 end

@@ -24,8 +24,7 @@ gem 'sinatra-partial'
 
 # TEST
 gem 'rack-test', group: :test
-gem 'rspec', group: :test
-gem 'rspec-mocks'
+gem 'rspec', '~> 3.1.0'
 #gem 'simplecov'
 
 

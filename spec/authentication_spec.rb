@@ -15,34 +15,39 @@ describe 'authentication with facebook' do
   end
 
   let(:oauth) do
-    double('oauth_double', get_access_token: 'ACCESS_TOKEN')
+    o = double('oauth_double')
+
+    allow(o).to receive(:get_access_token).
+      with('CODE').
+      and_return('ACCESS_TOKEN')
+    o
   end
 
   it 'should add user to db if non exists' do 
     get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
-    User.count.should == 1
-    User.first.first_name.should == 'Hassan'
-    User.first.last_name.should == 'Hanafy'
-    User.first.email.should == 'hassan@gmail.com'
-    User.first.access_token.should == 'ACCESS_TOKEN'
+    expect(User.count).to eq(1)
+    expect(User.first.first_name).to eq('Hassan')
+    expect(User.first.last_name).to eq('Hanafy')
+    expect(User.first.email).to eq('hassan@gmail.com')
+    expect(User.first.access_token).to eq('ACCESS_TOKEN')
   end
 
   it 'should put the user_id in the session' do
     get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
-    session['current_user'].id.should == User.first.id
+    expect(session['current_user'].id).to eq(User.first.id)
   end
 
   it 'should be able to logout' do
     get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     get '/logout'
-    session['current_user'].should  be_nil
+    expect(session['current_user'].nil?).to eq(true)
   end
 
   it 'should not add a new user for the same email' do
     get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     get '/logout'
     get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
-    User.count.should == 1
-    session['current_user'].id.should == User.first.id
+    expect(User.count).to eq(1)
+    expect(session['current_user'].id).to eq(User.first.id)
   end
 end
