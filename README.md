@@ -16,4 +16,4 @@ If you want to sign in with fb, you need to add the following line in /etc/hosts
 
 To run the console run ```racksh```
 
-To debug something add ```buybug``` and wait for the server to be intercepted. 
+To debug something add ```byebug``` and wait for the server to be intercepted. 
