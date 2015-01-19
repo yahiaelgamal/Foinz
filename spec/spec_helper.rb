@@ -4,7 +4,6 @@ ENV['RACK_ENV'] = 'test'
 require 'rack/test'
 require 'rspec'
 require File.expand_path('../../app.rb', __FILE__)
-Dir.glob('./{models helpers}/*.rb').each { |file| require file }
 
 
 module RSpecMixin

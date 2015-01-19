@@ -2,10 +2,6 @@ require File.expand_path('../spec_helper.rb', __FILE__)
 
 describe User do
 
-  #before(:all) do
-    #@person_hash = {first_name: 'Hassan', last_name: 'Hanafy',
-                   #email: 'has@gmail.com', access_token: 'ACCESS_TOKEN'}
-  #end
   let(:person_hash)do
     {first_name: 'Hassan', last_name: 'Hanafy',
      email: 'has@gmail.com', access_token: 'ACCESS_TOKEN'}

@@ -1,9 +1,10 @@
 require File.expand_path('../spec_helper.rb', __FILE__)
 
+# i need to overwrite it
+disable :sessions
+
 describe 'authentication with facebook' do
   before(:each) do
-    Koala::Facebook::OAuth.any_instance.stub(:get_access_token).
-                                    with(any_args).and_return('ACCESS_TOKEN')
 
     fb_profile = {first_name: 'Hassan',
                   last_name: 'Hanafy',
@@ -11,11 +12,14 @@ describe 'authentication with facebook' do
 
     Koala::Facebook::API.any_instance.stub(:get_object).with('me').
                                                       and_return(fb_profile)
-    
+  end
+
+  let(:oauth) do
+    double('oauth_double', get_access_token: 'ACCESS_TOKEN')
   end
 
   it 'should add user to db if non exists' do 
-    get '/callback?code=CODE'
+    get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     User.count.should == 1
     User.first.first_name.should == 'Hassan'
     User.first.last_name.should == 'Hanafy'
@@ -24,21 +28,21 @@ describe 'authentication with facebook' do
   end
 
   it 'should put the user_id in the session' do
-    get '/callback?code=CODE'
-    session[:user_id].should == User.first.id
+    get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
+    session['current_user'].id.should == User.first.id
   end
 
   it 'should be able to logout' do
-    get '/callback?code=CODE'
+    get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     get '/logout'
-    session[:user_id].should_not == User.first.id
+    session['current_user'].should  be_nil
   end
 
   it 'should not add a new user for the same email' do
-    get '/callback?code=CODE' # make the first user
+    get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     get '/logout'
-    get '/callback?code=CODE' # make the first user
+    get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     User.count.should == 1
-    session[:user_id].should == User.first.id
+    sessin['current_user'].id.should == User.first.id
   end
 end

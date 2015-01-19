@@ -17,7 +17,9 @@ Mongoid.load!("config/mongoid.yml", ENV['RACK_ENV'])
 APP_ID     = 306913702832623
 APP_SECRET = '3e2b50f67f7d8ee2d38ef3f1944855ea'
 
-use Rack::Session::Cookie, secret: 'elsa7elda7emboo'
+#use Rack::Session::Cookie, secret: 'elsa7elda7emboo'
+enable :sessions  unless test?
+
 set :haml, layout: true
 
 get '/' do
@@ -51,7 +53,6 @@ not_found do
 end
 
 ################################ AUTHENTICATION ###############################
-
 get '/login' do
   # generate a new oauth object with your app data and your callback url
   session['oauth'] = Koala::Facebook::OAuth.new(APP_ID, APP_SECRET,
