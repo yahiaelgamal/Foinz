@@ -62,8 +62,8 @@ get '/login' do
 end
 
 get '/logout' do
-  session['oauth'] = nil
-  session['current_user'] = nil
+  session.delete('oauth')
+  session.delete('current_user')
   redirect '/'
 end
 

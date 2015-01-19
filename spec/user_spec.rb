@@ -16,11 +16,11 @@ describe User do
 
   describe 'User validation' do
     it 'should validate first/last names, email, and access_token' do
-      expect(User.new(person_hash).valid?).to eq(true)
+      expect(User.new(person_hash)).to be_valid
 
       person_hash.keys.each do |key|
         # removing any of the the field invalidates the person
-        expect(User.new(person_hash.merge(key => nil)).valid?).to_not eq(true)
+        expect(User.new(person_hash.merge(key => nil))).to_not be_valid
       end
     end
   end

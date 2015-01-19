@@ -16,12 +16,11 @@ describe 'authentication with facebook' do
   end
 
   let(:oauth) do
-    o = double('oauth_double')
+    oauth_double = double('oauth_double')
 
-    allow(o).to receive(:get_access_token).
-      with('CODE').
-      and_return('ACCESS_TOKEN')
-    o
+    allow(oauth_double).to receive(:get_access_token).with('CODE').
+                                                  and_return('ACCESS_TOKEN')
+    oauth_double
   end
 
   it 'should add user to db if non exists' do 
@@ -42,7 +41,9 @@ describe 'authentication with facebook' do
   it 'should be able to logout' do
     get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     get '/logout'
-    expect(session['current_user'].nil?).to eq(true)
+    expect(session['current_user']).to be_nil
+    expect(last_response).to be_redirect
+    expect(last_response.location).to eq('http://example.org/')
   end
 
   it 'should not add a new user for the same email' do
