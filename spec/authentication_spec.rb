@@ -6,9 +6,9 @@ disable :sessions
 describe 'authentication with facebook' do
   before(:each) do
 
-    fb_profile = {first_name: 'Hassan',
-                  last_name: 'Hanafy',
-                  email: 'hassan@gmail.com'}
+    fb_profile = {'first_name' => 'Hassan',
+                  'last_name' => 'Hanafy',
+                  'email' => 'hassan@gmail.com'}
 
     Koala::Facebook::API.any_instance.stub(:get_object).with('me').
                                                       and_return(fb_profile)

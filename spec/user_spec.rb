@@ -3,8 +3,8 @@ require File.expand_path('../spec_helper.rb', __FILE__)
 describe User do
 
   let(:person_hash)do
-    {first_name: 'Hassan', last_name: 'Hanafy',
-     email: 'has@gmail.com', access_token: 'ACCESS_TOKEN'}
+    {'first_name' => 'Hassan', 'last_name' => 'Hanafy',
+     'email' => 'has@gmail.com', 'access_token' => 'ACCESS_TOKEN'}
   end
 
   describe 'User validation' do
