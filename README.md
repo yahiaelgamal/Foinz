@@ -21,6 +21,7 @@ To debug something add ```byebug``` and wait for the server to be intercepted.
 #### How to get started with writing tests? 
 
 Rspec 3 is great, it consists of three main componenets (core, expecations, and mocks). Find the links here
+
 [core](http://www.rubydoc.info/gems/rspec-core/frames)
 
 [expecataions](http://www.rubydoc.info/gems/rspec-expectations/frames)
