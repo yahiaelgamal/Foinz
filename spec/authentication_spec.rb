@@ -43,6 +43,6 @@ describe 'authentication with facebook' do
     get '/logout'
     get '/callback', {code: 'CODE'}, 'rack.session' => {'oauth' =>  oauth}
     User.count.should == 1
-    sessin['current_user'].id.should == User.first.id
+    session['current_user'].id.should == User.first.id
   end
 end
