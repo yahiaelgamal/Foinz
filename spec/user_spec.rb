@@ -2,15 +2,20 @@ require File.expand_path('../spec_helper.rb', __FILE__)
 
 describe User do
 
-  let(:person_hash)do
+  let(:person_hash) do
     {'first_name' => 'Hassan', 'last_name' => 'Hanafy',
-     'email' => 'has@gmail.com', 'access_token' => 'ACCESS_TOKEN'}
+     'email' => 'has@gmail.com', 'access_token' => 'ACCESS_TOKEN',
+     'fb_id' => '12345'}
+  end
+
+  let(:facebook_profile) do
+    {'first_name' => 'Hassan', 'last_name' => 'Hanafy',
+     'email' => 'has@gmail.com', 'access_token' => 'ACCESS_TOKEN',
+     'id' => '12345'}
   end
 
   describe 'User validation' do
     it 'should validate first/last names, email, and access_token' do
-      person_hash = {first_name: 'Hassan', last_name: 'Hanafy',
-                     email: 'has@gmail.com', access_token: 'ACCESS_TOKEN'}
       expect(User.new(person_hash).valid?).to eq(true)
 
       person_hash.keys.each do |key|
@@ -23,7 +28,7 @@ describe User do
   describe 'User creation' do
     it 'should add a new user to db with profile and access_token' do
       expect(User.count).to eq(0)
-      User.create_user_from_fb(person_hash, 'ACCESS_TOKEN')
+      User.create_user_from_fb(facebook_profile, 'ACCESS_TOKEN')
       expect(User.count).to eq(1)
     end
   end

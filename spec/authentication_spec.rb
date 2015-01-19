@@ -8,7 +8,8 @@ describe 'authentication with facebook' do
 
     fb_profile = {'first_name' => 'Hassan',
                   'last_name' => 'Hanafy',
-                  'email' => 'hassan@gmail.com'}
+                  'email' => 'hassan@gmail.com', 
+                  'id' => '123456'}
 
     Koala::Facebook::API.any_instance.stub(:get_object).with('me').
                                                       and_return(fb_profile)
@@ -30,6 +31,7 @@ describe 'authentication with facebook' do
     expect(User.first.last_name).to eq('Hanafy')
     expect(User.first.email).to eq('hassan@gmail.com')
     expect(User.first.access_token).to eq('ACCESS_TOKEN')
+    expect(User.first.fb_id).to eq('123456')
   end
 
   it 'should put the user_id in the session' do
